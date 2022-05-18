@@ -12,10 +12,9 @@ code {
 
 .App {
   display: flex;
-  text-align: center;
-  background-color: #252327;
+  flex-direction: column;
+  background-color: #c8b7a6;
   min-height: 100vh;
-  color: white;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
