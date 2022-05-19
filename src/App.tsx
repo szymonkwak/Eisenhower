@@ -3,6 +3,7 @@ import { theme } from './theme/theme';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import EisenhowerMatrix from './components/EisenhowerMatrix/EisenhowerMatrix';
+import AddTask from './components/AddTask/AddTask';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <CssBaseline />
         <div className="App">
           <h1>Eisenhower</h1>
+          <AddTask />
           <EisenhowerMatrix />
         </div>
       </ThemeProvider>

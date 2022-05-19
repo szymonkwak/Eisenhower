@@ -19,7 +19,7 @@ const EisenhowerMatrix = () => {
 
   return (
     <DragDropContext onDragEnd={handleDrop}>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         {taskQuadrants.map((quadrant) => {
           return <Quadrant name={quadrant} key={quadrant} />;
         })}

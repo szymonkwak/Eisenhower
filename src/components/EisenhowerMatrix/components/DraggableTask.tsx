@@ -1,6 +1,6 @@
 import { Draggable } from '@react-forked/dnd';
 import { Task } from '../../../store/typings';
-import TaskCard from './TaskCard';
+import TaskCard from './TaskCard/TaskCard';
 
 type DraggableTaskProps = {
   task: Task;

@@ -17,7 +17,12 @@ const Quadrant = ({ name }: QuadrantProps) => {
       <Droppable droppableId={name} key={name}>
         {(provided) => {
           return (
-            <Paper sx={{ p: 1, minHeight: 100 }} ref={provided.innerRef} {...provided.droppableProps}>
+            <Paper
+              variant="outlined"
+              sx={{ p: 1, m: 1, background: 'none', minHeight: 100 }}
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
               {name}
               {tasks.map((task, index) => {
                 if (task.type === name) return <DraggableTask task={task} index={index} key={task.id} />;
