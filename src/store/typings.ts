@@ -1,17 +1,17 @@
 export type Task = {
   id: string;
-  type: TaskGroups;
+  type: TaskQuadrants;
   title: string;
   comment?: string;
   deadline?: Date;
   label?: Array<string>;
 };
 
-export const taskGroups = [
+export const taskQuadrants = [
   'UrgentImportant',
   'UrgentNotImportant',
   'NotUrgentImportant',
   'NotUrgentNotImportant',
 ] as const;
 
-export type TaskGroups = typeof taskGroups[number];
+export type TaskQuadrants = typeof taskQuadrants[number];

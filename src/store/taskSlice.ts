@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { tasksMock } from '../mocks/tasks';
-import { Task, TaskGroups } from './typings';
+import { Task, TaskQuadrants } from './typings';
 
 const initialState: Array<Task> = tasksMock;
 
 type MoveTaskPayload = {
   taskId: string;
-  destination?: TaskGroups;
+  destination?: TaskQuadrants;
 };
 export const taskSlice = createSlice({
   name: 'tasks',
