@@ -1,11 +1,25 @@
-import { Card, CardHeader, CardContent, CardActions, Divider } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import { Card, CardHeader, CardContent, CardActions, Divider, IconButton, Typography } from '@mui/material';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
+import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded';
+import { Task } from '../../../store/typings';
+import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { deleteTask } from '../../../store/taskSlice';
 
-const TaskCard = ({ title }: any) => {
+type TaskCardProps = {
+  task: Task;
+};
+
+const TaskCard = ({ task }: TaskCardProps) => {
+  const dispatch = useAppDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteTask(task.id));
+  };
+
   return (
-    <Card variant="outlined" sx={{ p: 1 }}>
-      <CardHeader sx={{ p: 0 }} title={title} subheader="Date 1" />
+    <Card key={task.id} variant="outlined" sx={{ p: 1 }}>
+      <CardHeader sx={{ p: 0 }} title={task.title} subheader="Date 1" />
       <Divider />
       <CardContent sx={{ p: 0 }}>
         <Typography variant="body1" color="text.secondary">
@@ -13,9 +27,15 @@ const TaskCard = ({ title }: any) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing sx={{ p: 0, display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="contained">X</Button>
-        <Button>Y</Button>
-        <Button>Z</Button>
+        <IconButton color="primary" aria-label="label" component="span">
+          <LabelOutlinedIcon />
+        </IconButton>
+        <IconButton onClick={handleDelete} color="primary" aria-label="delete" component="span">
+          <DeleteForeverRoundedIcon />
+        </IconButton>
+        <IconButton color="primary" aria-label="done" component="span">
+          <DoneOutlineRoundedIcon />
+        </IconButton>
       </CardActions>
     </Card>
   );

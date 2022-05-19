@@ -13,7 +13,7 @@ const DraggableTask = ({ task, index }: DraggableTaskProps) => {
       {(provided) => {
         return (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <TaskCard title={task.title} />
+            <TaskCard task={task} />
           </div>
         );
       }}
