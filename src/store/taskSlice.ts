@@ -1,33 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { tasksMock } from '../mocks/tasks';
 import { Task, TaskGroups } from './typings';
 
-export type TasksState = Array<Task>;
+const initialState: Array<Task> = tasksMock;
 
-const initialState: TasksState = [
-  {
-    id: '112',
-    type: 'NotUrgentImportant',
-    title: 'Task no1',
-  },
-  {
-    id: '1223',
-    type: 'UrgentImportant',
-    title: 'Task no2',
-  },
-];
-
+type MoveTaskPayload = {
+  taskId: string;
+  destination?: TaskGroups;
+};
 export const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
+    moveTask: (state, action: PayloadAction<MoveTaskPayload>) => {
+      const { taskId, destination } = action.payload;
+      const task = state.find((task) => task.id === taskId);
+      if (task && destination) task.type = destination;
+    },
     add: (state) => {},
     delete: (state) => {},
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload;
-    // },
   },
 });
 
-export const { add } = taskSlice.actions;
+export const { moveTask } = taskSlice.actions;
 
 export default taskSlice.reducer;
