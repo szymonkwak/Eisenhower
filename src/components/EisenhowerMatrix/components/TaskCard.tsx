@@ -1,10 +1,11 @@
 import { Card, CardHeader, CardContent, CardActions, Divider, IconButton, Typography } from '@mui/material';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
-import DoneOutlineRoundedIcon from '@mui/icons-material/DoneOutlineRounded';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import { Task } from '../../../store/typings';
 import { useAppDispatch } from '../../../hooks/reduxHooks';
-import { deleteTask } from '../../../store/taskSlice';
+import { changeDoneStatus, deleteTask } from '../../../store/taskSlice';
 
 type TaskCardProps = {
   task: Task;
@@ -16,6 +17,12 @@ const TaskCard = ({ task }: TaskCardProps) => {
   const handleDelete = () => {
     dispatch(deleteTask(task.id));
   };
+
+  const handleDoneStatus = () => {
+    dispatch(changeDoneStatus(task.id));
+  };
+
+  // TODO styling based on done status
 
   return (
     <Card key={task.id} variant="outlined" sx={{ p: 1 }}>
@@ -33,8 +40,8 @@ const TaskCard = ({ task }: TaskCardProps) => {
         <IconButton onClick={handleDelete} color="primary" aria-label="delete" component="span">
           <DeleteForeverRoundedIcon />
         </IconButton>
-        <IconButton color="primary" aria-label="done" component="span">
-          <DoneOutlineRoundedIcon />
+        <IconButton onClick={handleDoneStatus} color="primary" aria-label="done" component="span">
+          {task.done ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankIcon />}
         </IconButton>
       </CardActions>
     </Card>

@@ -21,10 +21,14 @@ export const taskSlice = createSlice({
       const task = state.find((task) => task.id === taskId);
       if (task && destination) task.type = destination;
     },
+    changeDoneStatus: (state, action: PayloadAction<string>) => {
+      const task = state.find((task) => task.id === action.payload);
+      if (task) task.done = !task?.done;
+    },
   },
   // add: (state) => {},
 });
 
-export const { moveTask, deleteTask } = taskSlice.actions;
+export const { moveTask, deleteTask, changeDoneStatus } = taskSlice.actions;
 
 export default taskSlice.reducer;
