@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Task, TaskQuadrants } from './typings';
+import { quadrantNames, QuadrantNames, Task, TaskQuadrant } from './typings';
 import { v4 as uuidv4 } from 'uuid';
 import { tasksMock } from '../mocks/tasks';
 
 type MoveTaskPayload = {
   taskId: string;
-  destination?: TaskQuadrants;
+  destination?: QuadrantNames;
 };
 type AddNewTask = Omit<Task, 'id' | 'done'>;
 
-const initialState: Array<Task> = tasksMock;
+// const initialState: Array<TaskQuadrant> = quadrantNames.map((name) => {
+//   return { name, tasks: [] };
+// });
+const initialState: Array<TaskQuadrant> = tasksMock;
 
 export const taskSlice = createSlice({
   name: 'tasks',
@@ -28,7 +31,7 @@ export const taskSlice = createSlice({
       return state.filter((task) => task.id !== action.payload);
     },
     changeDoneStatus: (state, action: PayloadAction<string>) => {
-      const task = state.find((task) => task.id === action.payload);
+      const task = state.find(({ tasks }) => tasks.find((task) => task.id === action.payload));
       if (task) task.done = !task?.done;
     },
   },

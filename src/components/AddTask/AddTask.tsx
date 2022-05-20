@@ -3,19 +3,19 @@ import { Box } from '@mui/system';
 import { SyntheticEvent, useState } from 'react';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addNewTask } from '../../store/taskSlice';
-import { TaskQuadrants, taskQuadrants } from '../../store/typings';
+import { QuadrantNames, quadrantNames } from '../../store/typings';
 
 const AddTask = () => {
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
   const [deadline, setDeadline] = useState('');
-  const [taskType, setTaskType] = useState<TaskQuadrants>(taskQuadrants[0]);
+  const [taskType, setTaskType] = useState<QuadrantNames>(quadrantNames[0]);
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     console.log({ type: taskType, title, comment, deadline });
-    dispatch(addNewTask({ type: taskType, title, comment, deadline }));
+    // dispatch(addNewTask({ type: taskType, title, comment, deadline }));
   };
 
   return (
@@ -61,9 +61,9 @@ const AddTask = () => {
           size="small"
           value={taskType}
           label="Type"
-          onChange={(e) => setTaskType(e.target.value as TaskQuadrants)}
+          onChange={(e) => setTaskType(e.target.value as QuadrantNames)}
         >
-          {taskQuadrants.map((name) => (
+          {quadrantNames.map((name) => (
             <MenuItem value={name} key={name}>
               {name}
             </MenuItem>

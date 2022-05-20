@@ -1,9 +1,9 @@
-import { CardActions, IconButton, Typography, Box } from '@mui/material';
+import { CardActions, IconButton, Box } from '@mui/material';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import { Task, taskQuadrants } from '../../../../store/typings';
+import { Task } from '../../../../store/typings';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
 import { changeDoneStatus, deleteTask } from '../../../../store/taskSlice';
 
@@ -24,13 +24,6 @@ const TaskCardButtons = ({ task }: TaskCardButtonsProps) => {
 
   return (
     <CardActions disableSpacing sx={{ p: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-      {task.type === taskQuadrants[0] ? (
-        <Typography variant="body1" sx={{ color: '#CCCCCC' }}>
-          {task.deadline}
-        </Typography>
-      ) : (
-        <Typography />
-      )}
       <Box>
         <IconButton>
           <LabelOutlinedIcon />
