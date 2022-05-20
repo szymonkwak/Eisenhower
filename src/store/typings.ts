@@ -9,10 +9,10 @@ export type Task = {
 };
 
 export const taskQuadrants = [
-  'UrgentImportant',
-  'UrgentNotImportant',
-  'NotUrgentImportant',
-  'NotUrgentNotImportant',
+  'Urgent & Important',
+  'Urgent & Not important',
+  'Not urgent & Important',
+  'Not urgent & Not important',
 ] as const;
 
 export type TaskQuadrants = typeof taskQuadrants[number];

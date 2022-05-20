@@ -1,32 +1,54 @@
-import {
-  FormControl,
-  FormHelperText,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  TextField,
-  Typography,
-  Paper,
-  Button,
-} from '@mui/material';
+import { FormControl, MenuItem, Select, TextField, Typography, Paper, Button } from '@mui/material';
 import { Box } from '@mui/system';
+import { SyntheticEvent, useState } from 'react';
+import { useAppDispatch } from '../../hooks/reduxHooks';
+import { addNewTask } from '../../store/taskSlice';
+import { TaskQuadrants, taskQuadrants } from '../../store/typings';
 
 const AddTask = () => {
+  const [title, setTitle] = useState('');
+  const [comment, setComment] = useState('');
+  const [deadline, setDeadline] = useState('');
+  const [taskType, setTaskType] = useState<TaskQuadrants>(taskQuadrants[0]);
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    console.log({ type: taskType, title, comment, deadline });
+    dispatch(addNewTask({ type: taskType, title, comment, deadline }));
+  };
+
   return (
-    <Paper variant="outlined" sx={{ p: 2, m: 2, background: 'none', display: 'flex', flexDirection: 'column', gap: 1 }}>
+    <Paper
+      component="form"
+      onSubmit={handleSubmit}
+      variant="outlined"
+      sx={{ p: 2, m: 2, background: 'none', display: 'flex', flexDirection: 'column', gap: 1 }}
+    >
       <Typography variant="h5" sx={{ alignSelf: 'center' }}>
         Add task
       </Typography>
-      <TextField variant="standard" label="Title" size="small" />
-      <TextField variant="standard" label="Comment" size="small" />
-
+      <TextField
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+        variant="standard"
+        label="Title"
+        size="small"
+      />
+      <TextField
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        variant="standard"
+        label="Comment"
+        size="small"
+      />
       <TextField
         type="date"
+        value={deadline}
         label="Deadline"
         variant="standard"
-        onChange={(e) => console.log(e)}
+        onChange={(e) => setDeadline(e.target.value)}
         size="small"
         InputProps={{
           startAdornment: <Box />,
@@ -34,13 +56,22 @@ const AddTask = () => {
       />
 
       <FormControl>
-        <Select variant="standard" size="small" value={10} label="Type" onChange={(e) => console.log(e)}>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+        <Select
+          variant="standard"
+          size="small"
+          value={taskType}
+          label="Type"
+          onChange={(e) => setTaskType(e.target.value as TaskQuadrants)}
+        >
+          {taskQuadrants.map((name) => (
+            <MenuItem value={name} key={name}>
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-      <Button variant="outlined" size="small">
+
+      <Button type="submit" variant="outlined" size="small">
         Add
       </Button>
     </Paper>
