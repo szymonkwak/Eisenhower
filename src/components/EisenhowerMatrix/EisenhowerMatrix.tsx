@@ -3,7 +3,6 @@ import { DragDropContext, DropResult } from '@react-forked/dnd';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { RootState } from '../../store/store';
 import { moveTask } from '../../store/taskSlice';
-import { QuadrantNames } from '../../store/typings';
 import Quadrant from './components/Quadrant';
 
 const EisenhowerMatrix = () => {
@@ -15,7 +14,8 @@ const EisenhowerMatrix = () => {
     dispatch(
       moveTask({
         taskId: e.draggableId,
-        destination: e.destination?.droppableId as QuadrantNames,
+        destination: e.destination,
+        source: e.source,
       })
     );
   };

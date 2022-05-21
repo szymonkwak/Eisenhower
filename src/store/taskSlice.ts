@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
+import { DraggableLocation } from '@react-forked/dnd';
 import { QuadrantNames, Task, TaskQuadrant } from './typings';
 import { tasksMock } from '../mocks/tasks';
 
 type MoveTaskPayload = {
   taskId: string;
-  destination?: QuadrantNames;
+  destination: DraggableLocation | null;
+  source: DraggableLocation | null;
 };
+
 type AddNewTask = {
   type: QuadrantNames;
   task: Omit<Task, 'id' | 'done' | 'label'>;
@@ -22,9 +25,19 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     moveTask: (state, action: PayloadAction<MoveTaskPayload>) => {
-      const { taskId, destination } = action.payload;
-      const task = state.find((task) => task.id === taskId);
-      if (task && destination) task.type = destination;
+      const { taskId, source, destination } = action.payload;
+      if (!destination) return;
+      if (!source) return;
+
+      let taskToMove: any;
+
+      state.map(({ name, tasks }) => {
+        if (name === source.droppableId) taskToMove = tasks.splice(source.index, 1);
+      });
+
+      state.map(({ name, tasks }) => {
+        if (name === destination.droppableId) tasks.splice(destination.index, 0, taskToMove[0]);
+      });
     },
 
     addNewTask: (state, action: PayloadAction<AddNewTask>) => {
