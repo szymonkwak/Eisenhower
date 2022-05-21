@@ -32,7 +32,7 @@ const Quadrant = ({ quadrant }: QuadrantProps) => {
                 <Typography variant="h6">{quadrant.name}</Typography>
               </Box>
               {quadrant.tasks.map((task, index) => (
-                <DraggableTask task={task} index={index} key={task.id} />
+                <DraggableTask task={task} quadrantName={quadrant.name} index={index} key={task.id} />
               ))}
               {provided.placeholder}
             </Paper>

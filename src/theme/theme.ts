@@ -4,15 +4,15 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      paper: '#5c8d81',
+      paper: '#538075',
     },
     primary: {
-      main: '#5c8d81',
+      main: '#538075',
       light: '#6746c3',
       dark: '#334b45',
     },
     secondary: {
-      main: '#cccccc',
+      main: '#d9d9d9',
       light: '#fff1ff',
       dark: '#af8eb5',
     },
@@ -20,6 +20,10 @@ export const theme = createTheme({
 
   typography: {
     fontFamily: ['Raleway', 'sans-serif'].join(','),
+    h3: {
+      fontSize: '2rem',
+      fontWeight: '500',
+    },
   },
 
   components: {
@@ -56,6 +60,27 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: 'white',
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: 0,
         },
       },
     },

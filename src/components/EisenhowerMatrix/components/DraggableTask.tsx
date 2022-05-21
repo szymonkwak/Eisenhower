@@ -1,19 +1,20 @@
 import { Draggable } from '@react-forked/dnd';
-import { Task } from '../../../store/typings';
+import { QuadrantNames, Task } from '../../../store/typings';
 import TaskCard from './TaskCard/TaskCard';
 
 type DraggableTaskProps = {
   task: Task;
+  quadrantName: QuadrantNames
   index: number;
 };
 
-const DraggableTask = ({ task, index }: DraggableTaskProps) => {
+const DraggableTask = ({ task, quadrantName, index }: DraggableTaskProps) => {
   return (
     <Draggable key={task.id} draggableId={task.id} index={index}>
       {(provided) => {
         return (
           <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-            <TaskCard task={task} />
+            <TaskCard task={task} quadrantName={quadrantName} />
           </div>
         );
       }}

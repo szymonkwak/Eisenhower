@@ -12,7 +12,7 @@ type MoveTaskPayload = {
 
 type AddNewTask = {
   type: QuadrantNames;
-  task: Omit<Task, 'id' | 'done' | 'label'>;
+  task: Omit<Task, 'id' | 'done' | 'labels'>;
 };
 
 type AddLabel = {
@@ -77,10 +77,11 @@ export const taskSlice = createSlice({
     },
 
     addlabels: (state, action: PayloadAction<AddLabel>) => {
-      const { taskId, labels: label } = action.payload;
+      const { taskId, labels } = action.payload;
+      const newLabels = labels.split(',').filter((label) => label !== '');
       return state.map(({ name, tasks }) => {
         const updatedTasks = tasks.map((task) => {
-          if (task.id === taskId) task = { ...task, labels: label.split(',') };
+          if (task.id === taskId) task = { ...task, labels: task.labels.concat(newLabels) };
           return task;
         });
         return { name, tasks: updatedTasks };

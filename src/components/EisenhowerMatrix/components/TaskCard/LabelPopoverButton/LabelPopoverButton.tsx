@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Popover, IconButton, TextField, Box } from '@mui/material';
 import LabelOutlinedIcon from '@mui/icons-material/LabelOutlined';
+import DoneIcon from '@mui/icons-material/Done';
 import { useAppDispatch } from '../../../../../hooks/reduxHooks';
 import { addlabels } from '../../../../../store/taskSlice';
 import { Task } from '../../../../../store/typings';
@@ -19,6 +20,7 @@ const LabelPopoverButton = ({ task }: TaskLabelPopoverButtonProps) => {
     e.preventDefault();
     dispatch(addlabels({ taskId: task.id, labels: labels }));
     setLabels('');
+    handleClose();
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -50,10 +52,17 @@ const LabelPopoverButton = ({ task }: TaskLabelPopoverButtonProps) => {
           <TextField
             value={labels}
             onChange={(e) => setLabels(e.target.value)}
+            autoFocus
             size="small"
-            placeholder="separate labels by comma"
-            // color="primary"
-            sx={{ color: 'red' }}
+            placeholder="labels separated by comma"
+            sx={{ input: { color: 'white', minWidth: 205, pr: 2 } }}
+            InputProps={{
+              endAdornment: (
+                <IconButton type="submit">
+                  <DoneIcon />
+                </IconButton>
+              ),
+            }}
           />
         </Box>
       </Popover>

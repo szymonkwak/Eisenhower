@@ -1,22 +1,31 @@
-import { Card, CardHeader, CardContent, Typography } from '@mui/material';
-import { Task } from '../../../../store/typings';
-import TaskCardActions from './TaskCardActions';
+import { Card, CardHeader, CardContent, Typography, Divider, Stack } from '@mui/material';
+import { Task, QuadrantNames, quadrantNames } from '../../../../store/typings';
+import TaskCardActions from './TaskCardActions/TaskCardActions';
 
 type TaskCardProps = {
   task: Task;
+  quadrantName: QuadrantNames;
 };
 
-const TaskCard = ({ task }: TaskCardProps) => {
+const TaskCard = ({ task, quadrantName }: TaskCardProps) => {
   return (
-    <Card sx={{ m: 1, px: 1.5, pt: 1, pb: 0.5, opacity: `${task.done ? 0.4 : 1}` }}>
-      <CardHeader sx={{ p: 0 }} title={task.title} />
+    <Card sx={{ m: 1, px: 1.5, py: 1, opacity: `${task.done ? 0.4 : 1}` }}>
+      <Typography variant='h3'>{task.title}</Typography>
+      {/* <CardHeader title={task.title} /> */}
+      <Divider variant="fullWidth" sx={{ backgroundColor: 'white', borderBottomWidth: 2 }} />
 
-      <CardContent sx={{ p: 0 }}>
-        <Typography variant="body1" color="secondary">
-          {task.comment}
-        </Typography>
+      <CardContent sx={{ mt: 0.5 }}>
+        <Stack direction="row" justifyContent="space-between">
+          <Typography variant="body1" color="secondary">
+            {task.comment}
+          </Typography>
+          {quadrantName === quadrantNames[0] ? (
+            <Typography variant="body1" color="secondary">
+              {task.deadline}
+            </Typography>
+          ) : null}
+        </Stack>
       </CardContent>
-
       <TaskCardActions task={task} />
     </Card>
   );

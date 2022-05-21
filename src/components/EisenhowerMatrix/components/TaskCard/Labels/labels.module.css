@@ -1,0 +1,7 @@
+.labelChips {
+  -ms-overflow-style: none;
+  overflow: auto;
+}
+.labelChips::-webkit-scrollbar {
+  display: none;
+}

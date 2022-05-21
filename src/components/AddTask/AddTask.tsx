@@ -14,8 +14,11 @@ const AddTask = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log({ type: taskType, title, comment, deadline });
     dispatch(addNewTask({ type: taskType, task: { title, comment, deadline } }));
+    setTitle('');
+    setComment('');
+    setDeadline('');
+    setTaskType(quadrantNames[0]);
   };
 
   return (

@@ -1,4 +1,5 @@
 import { Chip, Stack } from '@mui/material';
+import styles from './labels.module.css';
 import { Task } from '../../../../../store/typings';
 import { useAppDispatch } from '../../../../../hooks/reduxHooks';
 import { deleteLabel } from '../../../../../store/taskSlice';
@@ -20,7 +21,7 @@ const Labels = ({ task }: LabelsProps) => {
   };
 
   return (
-    <Stack direction="row" spacing={0.5}>
+    <Stack direction="row" spacing={0.5} className={styles.labelChips}>
       {task.labels.map((label, index) => (
         <Chip
           size="small"
