@@ -10,6 +10,7 @@ export const tasksMock: Array<TaskQuadrant> = [
         deadline: '2022-05-30',
         done: true,
         comment: 'Cause why not? :)',
+        label: [],
       },
       {
         id: '1',
@@ -17,6 +18,7 @@ export const tasksMock: Array<TaskQuadrant> = [
         done: false,
         deadline: '2022-07-19',
         comment: 'gooo on!',
+        label: [],
       },
       {
         id: '2',
@@ -24,6 +26,7 @@ export const tasksMock: Array<TaskQuadrant> = [
         done: false,
         deadline: '2022-09-11',
         comment: 'after work is done',
+        label: [],
       },
     ],
   },

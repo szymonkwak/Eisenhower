@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { quadrantNames, QuadrantNames, Task, TaskQuadrant } from './typings';
 import { v4 as uuidv4 } from 'uuid';
+import { QuadrantNames, Task, TaskQuadrant } from './typings';
 import { tasksMock } from '../mocks/tasks';
 
 type MoveTaskPayload = {
   taskId: string;
   destination?: QuadrantNames;
 };
-type AddNewTask = Omit<Task, 'id' | 'done'>;
+type AddNewTask = {
+  type: QuadrantNames;
+  task: Omit<Task, 'id' | 'done' | 'label'>;
+};
 
 // const initialState: Array<TaskQuadrant> = quadrantNames.map((name) => {
 //   return { name, tasks: [] };
@@ -23,16 +26,31 @@ export const taskSlice = createSlice({
       const task = state.find((task) => task.id === taskId);
       if (task && destination) task.type = destination;
     },
+
     addNewTask: (state, action: PayloadAction<AddNewTask>) => {
-      const { type, title, comment, deadline } = action.payload;
-      state.push({ id: uuidv4(), type, title, comment, deadline, done: false });
+      const {
+        type,
+        task: { title, comment, deadline },
+      } = action.payload;
+      const quadrant = state.find((q) => q.name === type);
+      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, label: [] });
     },
+
     deleteTask: (state, action: PayloadAction<string>) => {
-      return state.filter((task) => task.id !== action.payload);
+      return state.map(({ name, tasks }) => {
+        const filteredTasks = tasks.filter((task) => task.id !== action.payload);
+        return { name, tasks: filteredTasks };
+      });
     },
+
     changeDoneStatus: (state, action: PayloadAction<string>) => {
-      const task = state.find(({ tasks }) => tasks.find((task) => task.id === action.payload));
-      if (task) task.done = !task?.done;
+      return state.map(({ name, tasks }) => {
+        const updatedTasks = tasks.map((task) => {
+          if (task.id === action.payload) task = { ...task, done: !task.done };
+          return task;
+        });
+        return { name, tasks: updatedTasks };
+      });
     },
   },
 });

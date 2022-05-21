@@ -4,7 +4,6 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      //   default: '#222222',
       paper: '#703f37',
     },
     primary: {
@@ -18,9 +17,7 @@ export const theme = createTheme({
       dark: '#af8eb5',
     },
   },
-  shape: {
-    // borderRadius: 10,
-  },
+
   components: {
     MuiPaper: {
       styleOverrides: {
@@ -46,10 +43,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           color: 'white',
-          paddingLeft: 4,
-          paddingRight: 0,
-          paddingBottom: 0,
-          paddingTop: 8,
+          padding: 0,
+          margin: 2,
         },
       },
     },

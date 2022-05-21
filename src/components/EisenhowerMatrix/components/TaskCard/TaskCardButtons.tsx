@@ -28,10 +28,10 @@ const TaskCardButtons = ({ task }: TaskCardButtonsProps) => {
         <IconButton>
           <LabelOutlinedIcon />
         </IconButton>
-        <IconButton onClick={handleDelete} aria-label="delete" component="span">
+        <IconButton onClick={handleDelete} aria-label="delete">
           <DeleteForeverRoundedIcon />
         </IconButton>
-        <IconButton onClick={handleDoneStatus} aria-label="done" component="span">
+        <IconButton onClick={handleDoneStatus} aria-label="done">
           {task.done ? <CheckBoxOutlinedIcon /> : <CheckBoxOutlineBlankIcon />}
         </IconButton>
       </Box>

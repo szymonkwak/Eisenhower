@@ -15,7 +15,7 @@ const AddTask = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     console.log({ type: taskType, title, comment, deadline });
-    // dispatch(addNewTask({ type: taskType, title, comment, deadline }));
+    dispatch(addNewTask({ type: taskType, task: { title, comment, deadline } }));
   };
 
   return (

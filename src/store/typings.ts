@@ -7,9 +7,9 @@ export type Task = {
   id: string;
   title: string;
   done: boolean;
-  comment?: string;
-  deadline?: string;
-  label?: Array<string>;
+  comment: string;
+  deadline: string;
+  label: Array<string>;
 };
 
 export const quadrantNames = [

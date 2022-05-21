@@ -7,10 +7,8 @@ type TaskCardProps = {
 };
 
 const TaskCard = ({ task }: TaskCardProps) => {
-  // TODO styling based on done status
-
   return (
-    <Card variant="outlined" sx={{ p: 1, m: 1 }}>
+    <Card sx={{ m: 1, px: 1.5, pt: 1, pb: 0.5, opacity: `${task.done ? 0.3 : 1}` }}>
       <CardHeader sx={{ p: 0 }} title={task.title} />
 
       <CardContent sx={{ p: 0 }}>
