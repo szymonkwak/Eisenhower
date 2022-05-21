@@ -1,9 +1,14 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
+  overflow: auto;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 code {
@@ -11,10 +16,22 @@ code {
 }
 
 .App {
+  padding: 0 16px;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   background-color: #daded4;
-  min-height: 100vh;
   align-items: center;
   font-size: calc(10px + 2vmin);
+  background-image: url('/Trees.svg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: auto 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .App {
+    background-size: auto 40%;
+  }
 }

@@ -26,7 +26,7 @@ const AddTask = () => {
       component="form"
       onSubmit={handleSubmit}
       variant="outlined"
-      sx={{ p: 2, m: 2, background: 'none', display: 'flex', flexDirection: 'column', gap: 1 }}
+      sx={{ p: 2, m: 2, background: '#daded4df', display: 'flex', flexDirection: 'column', gap: 1 }}
     >
       <Typography variant="h5" sx={{ alignSelf: 'center' }}>
         Add task
