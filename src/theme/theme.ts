@@ -4,26 +4,30 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      paper: '#703f37',
+      paper: '#5c8d81',
     },
     primary: {
       main: '#703f37',
       light: '#6746c3',
-      dark: '#000063',
+      dark: '#334b45',
     },
     secondary: {
-      main: '#e1bee7',
+      main: '#c29591',
       light: '#fff1ff',
       dark: '#af8eb5',
     },
+  },
+
+  typography: {
+    fontFamily: ['Raleway', 'sans-serif'].join(','),
   },
 
   components: {
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderWidth: 2,
-          borderColor: '#703f37',
+          borderWidth: 3,
+          borderColor: '#334b45',
         },
         elevation1: {
           boxShadow: 'none',
