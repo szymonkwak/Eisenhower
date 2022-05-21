@@ -15,6 +15,16 @@ type AddNewTask = {
   task: Omit<Task, 'id' | 'done' | 'label'>;
 };
 
+type AddLabel = {
+  taskId: string;
+  labels: string;
+};
+
+type DeleteLabel = {
+  taskId: string;
+  labelIndex: number;
+};
+
 // const initialState: Array<TaskQuadrant> = quadrantNames.map((name) => {
 //   return { name, tasks: [] };
 // });
@@ -46,7 +56,7 @@ export const taskSlice = createSlice({
         task: { title, comment, deadline },
       } = action.payload;
       const quadrant = state.find((q) => q.name === type);
-      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, label: [] });
+      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, labels: [] });
     },
 
     deleteTask: (state, action: PayloadAction<string>) => {
@@ -65,9 +75,30 @@ export const taskSlice = createSlice({
         return { name, tasks: updatedTasks };
       });
     },
+
+    addlabels: (state, action: PayloadAction<AddLabel>) => {
+      const { taskId, labels: label } = action.payload;
+      return state.map(({ name, tasks }) => {
+        const updatedTasks = tasks.map((task) => {
+          if (task.id === taskId) task = { ...task, labels: label.split(',') };
+          return task;
+        });
+        return { name, tasks: updatedTasks };
+      });
+    },
+
+    deleteLabel: (state, action: PayloadAction<DeleteLabel>) => {
+      const { taskId, labelIndex } = action.payload;
+      state.map(({ name, tasks }) => {
+        const updatedTasks = tasks.map((task) => {
+          if (task.id === taskId) task = { ...task, labels: task.labels.splice(labelIndex, 1) };
+          return task;
+        });
+      });
+    },
   },
 });
 
-export const { moveTask, addNewTask, deleteTask, changeDoneStatus } = taskSlice.actions;
+export const { moveTask, addNewTask, deleteTask, changeDoneStatus, addlabels, deleteLabel } = taskSlice.actions;
 
 export default taskSlice.reducer;

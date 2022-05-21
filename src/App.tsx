@@ -11,9 +11,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="App">
-          <h1>Eisenhower</h1>
-          <AddTask />
+          <h2>Eisenhower</h2>
           <EisenhowerMatrix />
+          <AddTask />
         </div>
       </ThemeProvider>
     </Provider>

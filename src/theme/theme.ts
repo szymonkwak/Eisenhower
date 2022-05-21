@@ -7,12 +7,12 @@ export const theme = createTheme({
       paper: '#5c8d81',
     },
     primary: {
-      main: '#703f37',
+      main: '#5c8d81',
       light: '#6746c3',
       dark: '#334b45',
     },
     secondary: {
-      main: '#c29591',
+      main: '#cccccc',
       light: '#fff1ff',
       dark: '#af8eb5',
     },
@@ -49,6 +49,13 @@ export const theme = createTheme({
           color: 'white',
           padding: 0,
           margin: 2,
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          color: 'white',
         },
       },
     },
