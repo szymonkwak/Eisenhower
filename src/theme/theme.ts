@@ -20,9 +20,34 @@ export const theme = createTheme({
 
   typography: {
     fontFamily: ['Raleway', 'sans-serif'].join(','),
-    h3: {
-      fontSize: '2rem',
+    h1: {
+      fontSize: '3rem',
+      fontWeight: '600',
+      '@media (max-width:840px)': {
+        fontSize: '2.2rem',
+      },
+    },
+    h2: {
+      fontSize: '1.8rem',
       fontWeight: '500',
+      '@media (max-width:840px)': {
+        fontSize: '1.6rem',
+      },
+    },
+    h3: {
+      fontSize: '1.3rem',
+      fontWeight: '500',
+      '@media (max-width:840px)': {
+        fontSize: '1.1rem',
+      },
+    },
+    h4: {
+      fontSize: '1.4rem',
+      fontWeight: '400',
+      lineHeight: 1.4,
+      '@media (max-width:840px)': {
+        fontSize: '1.2rem',
+      },
     },
   },
 

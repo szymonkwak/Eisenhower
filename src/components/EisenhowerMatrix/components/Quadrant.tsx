@@ -13,7 +13,7 @@ const Quadrant = ({ quadrant }: QuadrantProps) => {
       <Box
         sx={{
           m: 0,
-          pb: 0.2,
+          py: 0.3,
           display: 'flex',
           justifyContent: 'center',
           backgroundColor: 'primary.dark',
@@ -21,14 +21,14 @@ const Quadrant = ({ quadrant }: QuadrantProps) => {
           borderRadius: '4px 4px 0 0',
         }}
       >
-        <Typography variant="h6">{quadrant.name}</Typography>
+        <Typography variant="h3">{quadrant.name}</Typography>
       </Box>
       <Droppable droppableId={quadrant.name} key={quadrant.name}>
         {(provided) => {
           return (
             <Paper
               variant="outlined"
-              sx={{ p: 0, m: 0, borderRadius: '0 0 4px 4px', background: '#daded480', minHeight: 133.34 }}
+              sx={{ p: 0, m: 0, borderRadius: '0 0 4px 4px', background: '#daded480', minHeight: 130 }}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

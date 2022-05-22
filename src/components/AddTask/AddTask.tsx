@@ -1,15 +1,22 @@
-import { FormControl, MenuItem, Select, TextField, Typography, Paper, Button } from '@mui/material';
-import { Box } from '@mui/system';
+import { FormControl, MenuItem, Select, TextField, Typography, Paper, Button, Stack, Box } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { SyntheticEvent, useState } from 'react';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { addNewTask } from '../../store/taskSlice';
 import { QuadrantNames, quadrantNames } from '../../store/typings';
 
-const AddTask = () => {
+type AddTaskProps = {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const AddTask = ({ setOpen }: AddTaskProps) => {
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
   const [deadline, setDeadline] = useState('');
   const [taskType, setTaskType] = useState<QuadrantNames>(quadrantNames[0]);
+
+  const isMobile = useMediaQuery('(max-width:600px)');
+
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -19,6 +26,7 @@ const AddTask = () => {
     setComment('');
     setDeadline('');
     setTaskType(quadrantNames[0]);
+    setOpen(false);
   };
 
   return (
@@ -26,57 +34,45 @@ const AddTask = () => {
       component="form"
       onSubmit={handleSubmit}
       variant="outlined"
-      sx={{ p: 2, m: 2, background: '#daded4df', display: 'flex', flexDirection: 'column', gap: 1 }}
+      sx={{ m: isMobile ? 2 : 4, p: isMobile ? 2 : 4, background: '#daded4df' }}
     >
-      <Typography variant="h5" sx={{ alignSelf: 'center' }}>
-        Add task
-      </Typography>
-      <TextField
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-        variant="standard"
-        label="Title"
-        size="small"
-      />
-      <TextField
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        variant="standard"
-        label="Comment"
-        size="small"
-      />
-      <TextField
-        type="date"
-        value={deadline}
-        label="Deadline"
-        variant="standard"
-        onChange={(e) => setDeadline(e.target.value)}
-        size="small"
-        InputProps={{
-          startAdornment: <Box />,
-        }}
-      />
+      <Stack gap={2} sx={{ minWidth: `${isMobile ? null : '320px'}` }}>
+        <Typography variant="h2" sx={{ mb: 2, alignSelf: 'center' }}>
+          A thing to be done
+        </Typography>
+        <TextField
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          autoFocus
+          variant="outlined"
+          label="Title"
+        />
+        <TextField value={comment} onChange={(e) => setComment(e.target.value)} label="Comment" />
+        <TextField
+          type="date"
+          value={deadline}
+          label="Deadline"
+          onChange={(e) => setDeadline(e.target.value)}
+          InputProps={{
+            startAdornment: <Box />,
+          }}
+        />
 
-      <FormControl>
-        <Select
-          variant="standard"
-          size="small"
-          value={taskType}
-          label="Type"
-          onChange={(e) => setTaskType(e.target.value as QuadrantNames)}
-        >
-          {quadrantNames.map((name) => (
-            <MenuItem value={name} key={name}>
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+        <FormControl>
+          <Select value={taskType} label="Type" onChange={(e) => setTaskType(e.target.value as QuadrantNames)}>
+            {quadrantNames.map((name) => (
+              <MenuItem value={name} key={name}>
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-      <Button type="submit" variant="outlined" size="small">
-        Add
-      </Button>
+        <Button type="submit" variant="contained">
+          Save
+        </Button>
+      </Stack>
     </Paper>
   );
 };

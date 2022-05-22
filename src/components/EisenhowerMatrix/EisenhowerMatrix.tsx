@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { DragDropContext, DropResult } from '@react-forked/dnd';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { RootState } from '../../store/store';
@@ -21,13 +21,15 @@ const EisenhowerMatrix = () => {
   };
 
   return (
-    <DragDropContext onDragEnd={handleDrop}>
-      <Grid container spacing={1} sx={{ maxWidth: '1300px' }}>
-        {tasksState.map((quadrant) => {
-          return <Quadrant quadrant={quadrant} key={quadrant.name} />;
-        })}
-      </Grid>
-    </DragDropContext>
+    <Stack alignItems="center">
+      <DragDropContext onDragEnd={handleDrop}>
+        <Grid container spacing={1} sx={{ maxWidth: 1300 }}>
+          {tasksState.map((quadrant) => {
+            return <Quadrant quadrant={quadrant} key={quadrant.name} />;
+          })}
+        </Grid>
+      </DragDropContext>
+    </Stack>
   );
 };
 

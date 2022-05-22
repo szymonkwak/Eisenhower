@@ -91,7 +91,7 @@ export const taskSlice = createSlice({
     deleteLabel: (state, action: PayloadAction<DeleteLabel>) => {
       const { taskId, labelIndex } = action.payload;
       state.map(({ name, tasks }) => {
-        const updatedTasks = tasks.map((task) => {
+        tasks.map((task) => {
           if (task.id === taskId) task = { ...task, labels: task.labels.splice(labelIndex, 1) };
           return task;
         });

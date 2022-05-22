@@ -11,7 +11,6 @@ type LabelsProps = {
 const Labels = ({ task }: LabelsProps) => {
   const dispatch = useAppDispatch();
   const handleDelete = (index: number) => {
-    console.log(index);
     dispatch(
       deleteLabel({
         taskId: task.id,
