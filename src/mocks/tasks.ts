@@ -11,6 +11,7 @@ export const tasksMock: Array<TaskQuadrant> = [
         done: false,
         comment: 'Cause why not? :)',
         labels: ['important', 'fun'],
+        inFilter: false,
       },
       {
         id: '1',
@@ -19,6 +20,7 @@ export const tasksMock: Array<TaskQuadrant> = [
         deadline: '2022-07-19',
         comment: 'gooo on!',
         labels: [],
+        inFilter: false,
       },
       {
         id: '2',
@@ -26,7 +28,8 @@ export const tasksMock: Array<TaskQuadrant> = [
         done: false,
         deadline: '2022-09-11',
         comment: 'after work is done',
-        labels: ['now','veryveryimportant','to be continued','another label'],
+        labels: ['now', 'veryveryimportant', 'to be continued', 'another label'],
+        inFilter: true,
       },
     ],
   },

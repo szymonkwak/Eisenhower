@@ -9,10 +9,12 @@ type TaskCardProps = {
 
 const TaskCard = ({ task, quadrantName }: TaskCardProps) => {
   return (
-    <Card sx={{ m: 1, px: 1.5, py: 1, opacity: `${task.done ? 0.4 : 1}` }}>
+    <Card
+      elevation={task.inFilter ? 24 : 0}
+      sx={{ m: 1, px: 1.5, py: 1, opacity: `${task.done ? 0.4 : 1}`, backgroundColor: task.inFilter ? '#953097' : '' }}
+    >
       <Typography variant="h2">{task.title}</Typography>
       <Divider variant="fullWidth" sx={{ backgroundColor: 'white', borderBottomWidth: 2 }} />
-
       <CardContent sx={{ mt: 0.5 }}>
         <Stack direction="row" justifyContent="space-between">
           <Typography variant="body1" color="secondary">

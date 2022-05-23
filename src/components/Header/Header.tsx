@@ -1,5 +1,6 @@
-import { Box, Stack, TextField, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import AddTaskDialog from '../AddTask/AddTaskDialog';
+import Filter from '../Filter/Filter';
 
 const Header = () => {
   return (
@@ -17,10 +18,7 @@ const Header = () => {
 
       <Stack justifyContent="space-around" gap={1}>
         <AddTaskDialog />
-        <Stack direction="row" alignItems="center" gap={1}>
-          <Typography variant="body1">Filter by label:</Typography>
-          <TextField variant="outlined" size="small" sx={{ maxWidth: 160 }} />
-        </Stack>
+        <Filter />
       </Stack>
     </Stack>
   );

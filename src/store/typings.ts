@@ -10,6 +10,7 @@ export type Task = {
   comment: string;
   deadline: string;
   labels: Array<string>;
+  inFilter: boolean;
 };
 
 export const quadrantNames = [

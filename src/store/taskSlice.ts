@@ -56,7 +56,7 @@ export const taskSlice = createSlice({
         task: { title, comment, deadline },
       } = action.payload;
       const quadrant = state.find((q) => q.name === type);
-      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, labels: [] });
+      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, labels: [], inFilter: false });
     },
 
     deleteTask: (state, action: PayloadAction<string>) => {
@@ -97,9 +97,30 @@ export const taskSlice = createSlice({
         });
       });
     },
+
+    filterTasks: (state, action: PayloadAction<string>) => {
+      if (action.payload === '') {
+        return state.map(({ name, tasks }) => {
+          const updatedTasks = tasks.map((task) => {
+            return { ...task, inFilter: false };
+          });
+          return { name, tasks: updatedTasks };
+        });
+      }
+
+      return state.map(({ name, tasks }) => {
+        const updatedTasks = tasks.map((task) => {
+          if (task.labels.join().includes(action.payload)) task = { ...task, inFilter: true };
+          if (!task.labels.join().includes(action.payload)) task = { ...task, inFilter: false };
+          return task;
+        });
+        return { name, tasks: updatedTasks };
+      });
+    },
   },
 });
 
-export const { moveTask, addNewTask, deleteTask, changeDoneStatus, addlabels, deleteLabel } = taskSlice.actions;
+export const { moveTask, addNewTask, deleteTask, changeDoneStatus, addlabels, deleteLabel, filterTasks } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;
