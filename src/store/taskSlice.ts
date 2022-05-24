@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+import _ from 'lodash';
 import { DraggableLocation } from '@react-forked/dnd';
 import { QuadrantNames, Task, TaskQuadrant } from './typings';
 import { loadFromLocalStorage } from './localStorageSupport';
 
 type MoveTaskPayload = {
-  taskId: string;
   destination: DraggableLocation | null;
   source: DraggableLocation | null;
 };
@@ -13,6 +12,7 @@ type MoveTaskPayload = {
 type AddNewTask = {
   type: QuadrantNames;
   task: Omit<Task, 'id' | 'done' | 'labels' | 'inFilter'>;
+  labelsString: string;
 };
 
 type AddLabel = {
@@ -32,7 +32,7 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     moveTask: (state, action: PayloadAction<MoveTaskPayload>) => {
-      const { taskId, source, destination } = action.payload;
+      const { source, destination } = action.payload;
       if (!destination) return;
       if (!source) return;
 
@@ -51,9 +51,12 @@ export const taskSlice = createSlice({
       const {
         type,
         task: { title, comment, deadline },
+        labelsString,
       } = action.payload;
+
+      const labels = labelsString.split(',').filter((label) => label !== '');
       const quadrant = state.find((q) => q.name === type);
-      quadrant?.tasks.push({ id: uuidv4(), title, comment, deadline, done: false, labels: [], inFilter: false });
+      quadrant?.tasks.push({ id: _.uniqueId(), title, comment, deadline, done: false, labels, inFilter: false });
     },
 
     deleteTask: (state, action: PayloadAction<string>) => {

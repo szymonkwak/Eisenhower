@@ -13,6 +13,7 @@ const AddTask = ({ setOpen }: AddTaskProps) => {
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
   const [deadline, setDeadline] = useState('');
+  const [labelsString, setLabelsString] = useState('');
   const [taskType, setTaskType] = useState<QuadrantNames>(quadrantNames[0]);
 
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -21,10 +22,11 @@ const AddTask = ({ setOpen }: AddTaskProps) => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(addNewTask({ type: taskType, task: { title, comment, deadline } }));
+    dispatch(addNewTask({ type: taskType, task: { title, comment, deadline }, labelsString }));
     setTitle('');
     setComment('');
     setDeadline('');
+    setLabelsString('');
     setTaskType(quadrantNames[0]);
     setOpen(false);
   };
@@ -40,34 +42,35 @@ const AddTask = ({ setOpen }: AddTaskProps) => {
         <Typography variant="h2" sx={{ mb: 2, alignSelf: 'center' }}>
           A thing to be done
         </Typography>
-        <TextField
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          autoFocus
-          variant="outlined"
-          label="Title"
-        />
+
+        <TextField value={title} onChange={(e) => setTitle(e.target.value)} required autoFocus label="Title" />
+
         <TextField value={comment} onChange={(e) => setComment(e.target.value)} label="Comment" />
+
         <TextField
           type="date"
           value={deadline}
-          label="Deadline"
           onChange={(e) => setDeadline(e.target.value)}
+          label="Deadline"
           InputProps={{
             startAdornment: <Box />,
           }}
         />
 
-        <FormControl>
-          <Select value={taskType} label="Type" onChange={(e) => setTaskType(e.target.value as QuadrantNames)}>
-            {quadrantNames.map((name) => (
-              <MenuItem value={name} key={name}>
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <TextField
+          value={labelsString}
+          onChange={(e) => setLabelsString(e.target.value)}
+          label="Labels"
+          placeholder="Labels separated by comma"
+        />
+
+        <Select value={taskType} onChange={(e) => setTaskType(e.target.value as QuadrantNames)}>
+          {quadrantNames.map((name) => (
+            <MenuItem value={name} key={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
 
         <Button type="submit" variant="contained">
           Save

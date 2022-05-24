@@ -13,7 +13,6 @@ const EisenhowerMatrix = () => {
   const handleDrop = (e: DropResult) => {
     dispatch(
       moveTask({
-        taskId: e.draggableId,
         destination: e.destination,
         source: e.source,
       })
