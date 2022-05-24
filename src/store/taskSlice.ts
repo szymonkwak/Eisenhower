@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { DraggableLocation } from '@react-forked/dnd';
 import { QuadrantNames, Task, TaskQuadrant } from './typings';
-import { tasksMock } from '../mocks/tasks';
+import { loadFromLocalStorage } from './localStorageSupport';
 
 type MoveTaskPayload = {
   taskId: string;
@@ -12,7 +12,7 @@ type MoveTaskPayload = {
 
 type AddNewTask = {
   type: QuadrantNames;
-  task: Omit<Task, 'id' | 'done' | 'labels'>;
+  task: Omit<Task, 'id' | 'done' | 'labels' | 'inFilter'>;
 };
 
 type AddLabel = {
@@ -25,10 +25,7 @@ type DeleteLabel = {
   labelIndex: number;
 };
 
-// const initialState: Array<TaskQuadrant> = quadrantNames.map((name) => {
-//   return { name, tasks: [] };
-// });
-const initialState: Array<TaskQuadrant> = tasksMock;
+const initialState: Array<TaskQuadrant> = loadFromLocalStorage();
 
 export const taskSlice = createSlice({
   name: 'tasks',
