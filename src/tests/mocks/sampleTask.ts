@@ -1,5 +1,5 @@
 export const sampleTask = {
-  id: '0',
+  id: 'sample-id',
   title: 'Walk on the Moon',
   deadline: '2022-05-30',
   done: false,

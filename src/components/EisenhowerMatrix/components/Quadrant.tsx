@@ -28,7 +28,13 @@ const Quadrant = ({ quadrant }: QuadrantProps) => {
           return (
             <Paper
               variant="outlined"
-              sx={{ p: 0, m: 0, borderRadius: '0 0 4px 4px', background: '#daded480', minHeight: 130 }}
+              sx={{
+                p: 0,
+                m: 0,
+                borderRadius: '0 0 4px 4px',
+                background: '#daded480',
+                minHeight: '30vh',
+              }}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

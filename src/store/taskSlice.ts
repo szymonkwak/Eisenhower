@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import _ from 'lodash';
 import { DraggableLocation } from '@react-forked/dnd';
 import { QuadrantNames, Task, TaskQuadrant } from './typings';
 import { loadFromLocalStorage } from './localStorageSupport';
@@ -54,9 +53,17 @@ export const taskSlice = createSlice({
         labelsString,
       } = action.payload;
 
-      const labels = labelsString.split(',').filter((label) => label !== '');
+      const labels = labelsString.split(',').map((label) => label.trim());
       const quadrant = state.find((q) => q.name === type);
-      quadrant?.tasks.push({ id: _.uniqueId(), title, comment, deadline, done: false, labels, inFilter: false });
+      quadrant?.tasks.push({
+        id: Date.now().toString(),
+        title,
+        comment,
+        deadline,
+        done: false,
+        labels,
+        inFilter: false,
+      });
     },
 
     deleteTask: (state, action: PayloadAction<string>) => {
