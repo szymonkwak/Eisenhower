@@ -53,7 +53,11 @@ export const taskSlice = createSlice({
         labelsString,
       } = action.payload;
 
-      const labels = labelsString.split(',').map((label) => label.trim());
+      const labels = labelsString
+        .split(',')
+        .filter((label) => label !== '')
+        .map((label) => label.trim());
+
       const quadrant = state.find((q) => q.name === type);
       quadrant?.tasks.push({
         id: Date.now().toString(),

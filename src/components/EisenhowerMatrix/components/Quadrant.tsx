@@ -9,7 +9,7 @@ type QuadrantProps = {
 
 const Quadrant = ({ quadrant }: QuadrantProps) => {
   return (
-    <Grid key={quadrant.name} item xs={12} sm={6}>
+    <Grid key={quadrant.name} item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column' }}>
       <Box
         sx={{
           m: 0,
@@ -34,6 +34,7 @@ const Quadrant = ({ quadrant }: QuadrantProps) => {
                 borderRadius: '0 0 4px 4px',
                 background: '#daded480',
                 minHeight: '30vh',
+                flexGrow: 1,
               }}
               ref={provided.innerRef}
               {...provided.droppableProps}
